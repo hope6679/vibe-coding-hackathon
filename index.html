@@ -1165,7 +1165,7 @@
 <section id="hero">
   <div class="hero-badge">
     <span class="hero-badge-dot"></span>
-    2026.03.14 SAT — 바이브코딩 해커톤
+    2026.03.21 SAT — 바이브코딩 해커톤
   </div>
 
   <h1 class="hero-headline">
@@ -1207,7 +1207,7 @@
   </div>
 
   <div class="hero-date-tag">
-    <span>2026년 3월 14일 토요일</span> · 09:00 – 21:00 KST · 온·오프라인 병행
+    <span>2026년 3월 21일 토요일</span> · 09:00 – 21:00 KST · 온·오프라인 병행
   </div>
 </section>
 
@@ -1299,38 +1299,38 @@
   <div class="section-inner">
     <div class="section-tag reveal">일정</div>
     <h2 class="section-title reveal reveal-delay-1">대회 타임라인</h2>
-    <p class="section-desc reveal reveal-delay-2">3월 1일 신청 시작부터 3월 20일 결과 발표까지. 모든 일정을 확인하고 준비하세요.</p>
+    <p class="section-desc reveal reveal-delay-2">3월 8일 신청 시작부터 3월 27일 결과 발표까지. 모든 일정을 확인하고 준비하세요.</p>
 
     <div class="timeline-track reveal reveal-delay-2">
       <div class="timeline-item">
-        <div class="timeline-date">2026.03.01</div>
+        <div class="timeline-date">2026.03.08</div>
         <div class="timeline-event">신청 접수 시작</div>
         <div class="timeline-note">선착순 200명 마감 — 자리가 남아있을 때 신청하세요</div>
         <span class="timeline-badge">✓ 신청 중</span>
       </div>
       <div class="timeline-item">
-        <div class="timeline-date">2026.03.11</div>
+        <div class="timeline-date">2026.03.18</div>
         <div class="timeline-event">GitHub 레포 사전 제출</div>
         <div class="timeline-note">대회 3일 전 · own-it 서비스 연동 필수</div>
       </div>
       <div class="timeline-item active">
-        <div class="timeline-date">2026.03.14 (SAT)</div>
+        <div class="timeline-date">2026.03.21 (SAT)</div>
         <div class="timeline-event">바이브코딩 해커톤 D-DAY</div>
         <div class="timeline-note">09:00 KST 시작 → 21:00 KST 종료 (12시간 논스톱)</div>
         <span class="timeline-badge">🔥 메인 이벤트</span>
       </div>
       <div class="timeline-item">
-        <div class="timeline-date">2026.03.15 자정</div>
+        <div class="timeline-date">2026.03.22 자정</div>
         <div class="timeline-event">최종 제출 마감</div>
         <div class="timeline-note">발표자료(필수) + 서비스 소개 5분 영상(선택)</div>
       </div>
       <div class="timeline-item">
-        <div class="timeline-date">2026.03.15 – 03.19</div>
+        <div class="timeline-date">2026.03.22 – 03.26</div>
         <div class="timeline-event">심사 진행</div>
         <div class="timeline-note">AI + 전문 심사위원 + 커뮤니티 동시 진행 · 실시간 집계</div>
       </div>
       <div class="timeline-item">
-        <div class="timeline-date">2026.03.20</div>
+        <div class="timeline-date">2026.03.27</div>
         <div class="timeline-event">결과 발표 & 시상식</div>
         <div class="timeline-note">수상자 발표 + 시상식 · 온라인 동시 중계</div>
       </div>
@@ -1556,7 +1556,7 @@
 </footer>
 
 <script>
-  const TARGET = new Date('2026-03-14T09:00:00+09:00').getTime();
+  const TARGET = new Date('2026-03-21T09:00:00+09:00').getTime();
 
   function pad(n) { return String(Math.floor(n)).padStart(2, '0'); }
 
@@ -1576,7 +1576,7 @@
   setInterval(updateCountdown, 1000);
 
   function updateDday() {
-    const diff = new Date('2026-03-14T09:00:00+09:00') - new Date();
+    const diff = new Date('2026-03-21T09:00:00+09:00') - new Date();
     const days = Math.ceil(diff / 86400000);
     document.getElementById('dday-text').textContent = days > 0 ? 'D-' + days : days === 0 ? 'D-DAY' : 'ENDED';
   }
