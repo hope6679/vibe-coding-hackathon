@@ -1824,38 +1824,16 @@
 
   function hidePieTooltip() { pieTooltip.classList.remove('visible'); }
 
-  let pinnedIdx = null;
-
   document.querySelectorAll('.pie-slice, .eval-legend-item').forEach(el => {
-    el.addEventListener('mouseenter', e => {
-      if (pinnedIdx === null) showPieTooltip(e, +el.dataset.idx);
-    });
-    el.addEventListener('mousemove', e => {
-      if (pinnedIdx === null) movePieTooltip(e);
-    });
-    el.addEventListener('mouseleave', () => {
-      if (pinnedIdx === null) hidePieTooltip();
-    });
-    el.addEventListener('click', e => {
-      e.stopPropagation();
-      const idx = +el.dataset.idx;
-      if (pinnedIdx === idx) {
-        pinnedIdx = null;
-        hidePieTooltip();
-      } else {
-        pinnedIdx = idx;
-        showPieTooltip(e, idx);
-        movePieTooltip(e);
-      }
-    });
+    el.addEventListener('mouseenter', e => showPieTooltip(e, +el.dataset.idx));
+    el.addEventListener('mousemove', movePieTooltip);
+    el.addEventListener('mouseleave', hidePieTooltip);
+    el.addEventListener('touchstart', e => { showPieTooltip(e.touches[0], +el.dataset.idx); movePieTooltip(e.touches[0]); }, { passive: true });
+    el.addEventListener('touchend', () => setTimeout(hidePieTooltip, 1200));
   });
 
-  document.addEventListener('click', () => {
-    if (pinnedIdx !== null) {
-      pinnedIdx = null;
-      hidePieTooltip();
-    }
-  });
+  document.addEventListener('scroll', hidePieTooltip, { passive: true });
+  document.addEventListener('touchmove', hidePieTooltip, { passive: true });
 
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
