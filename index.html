@@ -962,144 +962,126 @@
       background: var(--bg2);
     }
 
-    .eval-circles {
+    .eval-pie-container {
       display: flex;
-      gap: 48px;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       margin-top: 56px;
-      flex-wrap: wrap;
+      gap: 36px;
     }
 
-    .eval-circle-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      cursor: default;
+    #eval-pie {
+      display: block;
+      width: 100%;
+      max-width: 360px;
     }
 
-    .eval-circle-wrap {
-      position: relative;
-      width: 160px;
-      height: 160px;
+    .pie-slice {
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease;
+      transform-box: view-box;
+      transform-origin: 180px 180px;
     }
 
-    .eval-circle-svg {
-      width: 160px;
-      height: 160px;
-      transform: rotate(-90deg);
-      overflow: visible;
+    .pie-slice:hover {
+      transform: scale(1.06);
+      filter: brightness(1.25);
     }
 
-    .eval-circle-bg {
-      fill: none;
-      stroke: var(--border);
-      stroke-width: 8;
-    }
-
-    .eval-circle-fill {
-      fill: none;
-      stroke-width: 8;
-      stroke-linecap: round;
-      stroke-dasharray: 408.41;
-      stroke-dashoffset: 408.41;
-      transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .eval-circle-item:nth-child(1) .eval-circle-fill { stroke: var(--neon); filter: drop-shadow(0 0 8px rgba(0, 255, 178, 0.6)); }
-    .eval-circle-item:nth-child(2) .eval-circle-fill { stroke: #A78BFA; filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.5)); }
-    .eval-circle-item:nth-child(3) .eval-circle-fill { stroke: var(--orange); filter: drop-shadow(0 0 8px rgba(255, 107, 44, 0.5)); }
-
-    .eval-circle-inner {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-    }
-
-    .eval-circle-pct {
-      font-size: 38px;
+    .pie-slice-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 19px;
       font-weight: 900;
-      line-height: 1;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      pointer-events: none;
+      fill: #0A0A0F;
     }
 
-    .eval-circle-item:nth-child(1) .eval-circle-pct { color: var(--neon); text-shadow: 0 0 20px rgba(0, 255, 178, 0.5); }
-    .eval-circle-item:nth-child(2) .eval-circle-pct { color: #A78BFA; text-shadow: 0 0 20px rgba(167, 139, 250, 0.4); }
-    .eval-circle-item:nth-child(3) .eval-circle-pct { color: var(--orange); text-shadow: 0 0 20px rgba(255, 107, 44, 0.4); }
-
-    .eval-circle-sublabel {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--text-dim);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .pie-center-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      fill: var(--text);
+      text-anchor: middle;
+      dominant-baseline: middle;
     }
 
-    .eval-circle-name {
-      font-size: 15px;
+    .pie-center-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      fill: var(--text-dim);
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+
+    .eval-legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .eval-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      transition: all 0.2s ease;
+    }
+
+    .eval-legend-item:hover {
+      background: var(--glass2);
+      transform: translateY(-2px);
+    }
+
+    .eval-legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .eval-legend-name {
+      font-size: 14px;
       font-weight: 700;
       color: var(--text);
-      text-align: center;
-      margin-top: 18px;
-      max-width: 160px;
-      line-height: 1.4;
     }
 
-    .eval-circle-name small {
-      display: block;
-      font-size: 11px;
-      color: var(--text-dim);
-      font-weight: 400;
-      margin-top: 3px;
+    .eval-legend-pct {
+      font-size: 15px;
+      font-weight: 900;
     }
 
-    .eval-tooltip {
-      position: absolute;
-      bottom: calc(100% + 14px);
-      left: 50%;
-      transform: translateX(-50%) translateY(6px);
+    #pie-tooltip {
+      position: fixed;
       background: var(--bg3);
       border: 1px solid var(--border-neon);
       border-radius: 12px;
       padding: 14px 18px;
-      width: 230px;
+      width: 250px;
       font-size: 13px;
       color: var(--text-dim);
       line-height: 1.65;
-      opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      z-index: 100;
-      text-align: left;
+      z-index: 1001;
+      opacity: 0;
+      transition: opacity 0.15s ease;
       white-space: normal;
     }
 
-    .eval-tooltip::before {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 8px solid transparent;
-      border-top-color: var(--border-neon);
-    }
+    #pie-tooltip.visible { opacity: 1; }
 
-    .eval-tooltip::after {
-      content: '';
-      position: absolute;
-      top: calc(100% - 1px);
-      left: 50%;
-      transform: translateX(-50%);
-      border: 7px solid transparent;
-      border-top-color: var(--bg3);
-    }
-
-    .eval-circle-item:hover .eval-tooltip {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+    .pie-tooltip-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
     }
 
     /* Mid-page CTA strip */
@@ -1608,48 +1590,47 @@
     <h2 class="section-title reveal reveal-delay-1">3축 심사 기준</h2>
     <p class="section-desc reveal reveal-delay-2">AI, 전문 심사위원, 커뮤니티가 세 가지 축으로 평가합니다. 수치로 공개되는 투명한 심사.</p>
 
-    <div class="eval-circles">
-      <div class="eval-circle-item reveal">
-        <div class="eval-circle-wrap">
-          <svg class="eval-circle-svg" viewBox="0 0 160 160">
-            <circle class="eval-circle-bg" cx="80" cy="80" r="65"/>
-            <circle class="eval-circle-fill" cx="80" cy="80" r="65" data-pct="40"/>
-          </svg>
-          <div class="eval-circle-inner">
-            <span class="eval-circle-pct">40%</span>
-            <span class="eval-circle-sublabel">weight</span>
-          </div>
-          <div class="eval-tooltip">실제로 작동하는가? 핵심 기능이 구현되어 있는가? 배포 가능한 수준인가?</div>
-        </div>
-        <div class="eval-circle-name">서비스 완성도<small>Service Completeness</small></div>
+    <div class="eval-pie-container">
+      <div class="reveal">
+        <svg id="eval-pie" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+          <!-- Slice 1: 서비스 완성도 40% (-90° → 54°) -->
+          <path class="pie-slice" data-idx="0"
+            d="M 180 40 A 140 140 0 0 1 262.3 293.3 L 221.1 236.6 A 70 70 0 0 0 180 110 Z"
+            fill="#00FFB2" stroke="var(--bg2)" stroke-width="4"/>
+          <!-- Slice 2: 사용자 경험 30% (54° → 162°) -->
+          <path class="pie-slice" data-idx="1"
+            d="M 262.3 293.3 A 140 140 0 0 1 46.9 223.3 L 113.4 201.6 A 70 70 0 0 0 221.1 236.6 Z"
+            fill="#A78BFA" stroke="var(--bg2)" stroke-width="4"/>
+          <!-- Slice 3: 창의성 & 임팩트 30% (162° → 270°) -->
+          <path class="pie-slice" data-idx="2"
+            d="M 46.9 223.3 A 140 140 0 0 1 180 40 L 180 110 A 70 70 0 0 0 113.4 201.6 Z"
+            fill="#FF6B2C" stroke="var(--bg2)" stroke-width="4"/>
+          <!-- Percentage labels inside each slice -->
+          <text x="279.9" y="147.6" class="pie-slice-label">40%</text>
+          <text x="147.6" y="279.9" class="pie-slice-label">30%</text>
+          <text x="95.1"  y="118.3" class="pie-slice-label">30%</text>
+          <!-- Center hole text -->
+          <text x="180" y="172" class="pie-center-title">3축</text>
+          <text x="180" y="196" class="pie-center-sub">심사기준</text>
+        </svg>
       </div>
-      <div class="eval-circle-item reveal reveal-delay-1">
-        <div class="eval-circle-wrap">
-          <svg class="eval-circle-svg" viewBox="0 0 160 160">
-            <circle class="eval-circle-bg" cx="80" cy="80" r="65"/>
-            <circle class="eval-circle-fill" cx="80" cy="80" r="65" data-pct="30"/>
-          </svg>
-          <div class="eval-circle-inner">
-            <span class="eval-circle-pct">30%</span>
-            <span class="eval-circle-sublabel">weight</span>
-          </div>
-          <div class="eval-tooltip">사용자가 직관적으로 사용할 수 있는가? 실제로 써보고 싶은 서비스인가?</div>
+
+      <div class="eval-legend reveal reveal-delay-1">
+        <div class="eval-legend-item" data-idx="0">
+          <div class="eval-legend-dot" style="background:#00FFB2"></div>
+          <span class="eval-legend-name">서비스 완성도</span>
+          <span class="eval-legend-pct" style="color:#00FFB2">40%</span>
         </div>
-        <div class="eval-circle-name">사용자 경험<small>UX / Engagement</small></div>
-      </div>
-      <div class="eval-circle-item reveal reveal-delay-2">
-        <div class="eval-circle-wrap">
-          <svg class="eval-circle-svg" viewBox="0 0 160 160">
-            <circle class="eval-circle-bg" cx="80" cy="80" r="65"/>
-            <circle class="eval-circle-fill" cx="80" cy="80" r="65" data-pct="30"/>
-          </svg>
-          <div class="eval-circle-inner">
-            <span class="eval-circle-pct">30%</span>
-            <span class="eval-circle-sublabel">weight</span>
-          </div>
-          <div class="eval-tooltip">문제 해결 방식이 독창적인가? 실제 세상에 어떤 변화를 가져올 수 있는가?</div>
+        <div class="eval-legend-item" data-idx="1">
+          <div class="eval-legend-dot" style="background:#A78BFA"></div>
+          <span class="eval-legend-name">사용자 경험</span>
+          <span class="eval-legend-pct" style="color:#A78BFA">30%</span>
         </div>
-        <div class="eval-circle-name">창의성 & 임팩트<small>Creativity & Impact</small></div>
+        <div class="eval-legend-item" data-idx="2">
+          <div class="eval-legend-dot" style="background:#FF6B2C"></div>
+          <span class="eval-legend-name">창의성 & 임팩트</span>
+          <span class="eval-legend-pct" style="color:#FF6B2C">30%</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1685,6 +1666,11 @@
     </div>
   </div>
 </section>
+
+<div id="pie-tooltip">
+  <div class="pie-tooltip-title" id="pie-tooltip-title"></div>
+  <div id="pie-tooltip-desc"></div>
+</div>
 
 <footer>
   <div class="footer-inner">
@@ -1743,18 +1729,39 @@
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  const circumference = 408.41;
-  const circleObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const pct = parseInt(entry.target.getAttribute('data-pct'));
-        entry.target.style.strokeDashoffset = circumference * (1 - pct / 100);
-        circleObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
+  const pieData = [
+    { title: '서비스 완성도 (40%)', desc: '실제로 작동하는가? 핵심 기능이 구현되어 있는가? 배포 가능한 수준인가?' },
+    { title: '사용자 경험 (30%)',   desc: '사용자가 직관적으로 사용할 수 있는가? 실제로 써보고 싶은 서비스인가?' },
+    { title: '창의성 & 임팩트 (30%)', desc: '문제 해결 방식이 독창적인가? 실제 세상에 어떤 변화를 가져올 수 있는가?' },
+  ];
 
-  document.querySelectorAll('.eval-circle-fill').forEach(el => circleObserver.observe(el));
+  const pieTooltip = document.getElementById('pie-tooltip');
+  const pieTooltipTitle = document.getElementById('pie-tooltip-title');
+  const pieTooltipDesc = document.getElementById('pie-tooltip-desc');
+
+  function showPieTooltip(e, idx) {
+    pieTooltipTitle.textContent = pieData[idx].title;
+    pieTooltipDesc.textContent = pieData[idx].desc;
+    pieTooltip.classList.add('visible');
+    movePieTooltip(e);
+  }
+
+  function movePieTooltip(e) {
+    const x = e.clientX + 16;
+    const y = e.clientY + 16;
+    const w = pieTooltip.offsetWidth;
+    const h = pieTooltip.offsetHeight;
+    pieTooltip.style.left = (x + w > window.innerWidth  - 10 ? x - w - 32 : x) + 'px';
+    pieTooltip.style.top  = (y + h > window.innerHeight - 10 ? y - h - 32 : y) + 'px';
+  }
+
+  function hidePieTooltip() { pieTooltip.classList.remove('visible'); }
+
+  document.querySelectorAll('.pie-slice, .eval-legend-item').forEach(el => {
+    el.addEventListener('mouseenter', e => showPieTooltip(e, +el.dataset.idx));
+    el.addEventListener('mousemove', movePieTooltip);
+    el.addEventListener('mouseleave', hidePieTooltip);
+  });
 
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
