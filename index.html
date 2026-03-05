@@ -1829,7 +1829,7 @@
     el.addEventListener('mousemove', movePieTooltip);
     el.addEventListener('mouseleave', hidePieTooltip);
     el.addEventListener('touchstart', e => { showPieTooltip(e.touches[0], +el.dataset.idx); movePieTooltip(e.touches[0]); }, { passive: true });
-    el.addEventListener('touchend', () => setTimeout(hidePieTooltip, 1200));
+    el.addEventListener('touchend', () => setTimeout(hidePieTooltip, 3000));
   });
 
   document.addEventListener('scroll', hidePieTooltip, { passive: true });
