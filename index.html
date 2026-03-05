@@ -1030,9 +1030,11 @@
 
     .eval-legend {
       display: flex;
+      flex-direction: column;
       gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
+      width: 100%;
+      max-width: 360px;
+      align-self: center;
     }
 
     .eval-legend-item {
@@ -1769,10 +1771,37 @@
 
   function hidePieTooltip() { pieTooltip.classList.remove('visible'); }
 
+  let pinnedIdx = null;
+
   document.querySelectorAll('.pie-slice, .eval-legend-item').forEach(el => {
-    el.addEventListener('mouseenter', e => showPieTooltip(e, +el.dataset.idx));
-    el.addEventListener('mousemove', movePieTooltip);
-    el.addEventListener('mouseleave', hidePieTooltip);
+    el.addEventListener('mouseenter', e => {
+      if (pinnedIdx === null) showPieTooltip(e, +el.dataset.idx);
+    });
+    el.addEventListener('mousemove', e => {
+      if (pinnedIdx === null) movePieTooltip(e);
+    });
+    el.addEventListener('mouseleave', () => {
+      if (pinnedIdx === null) hidePieTooltip();
+    });
+    el.addEventListener('click', e => {
+      e.stopPropagation();
+      const idx = +el.dataset.idx;
+      if (pinnedIdx === idx) {
+        pinnedIdx = null;
+        hidePieTooltip();
+      } else {
+        pinnedIdx = idx;
+        showPieTooltip(e, idx);
+        movePieTooltip(e);
+      }
+    });
+  });
+
+  document.addEventListener('click', () => {
+    if (pinnedIdx !== null) {
+      pinnedIdx = null;
+      hidePieTooltip();
+    }
   });
 
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
